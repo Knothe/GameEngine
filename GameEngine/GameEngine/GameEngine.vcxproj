@@ -90,10 +90,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\ExternalLibs\SDL2_ttf-2.0.15\include;..\ExternalLibs\SDL_image\include;..\ExternalLibs\SDL2\include;..\ExternalLibs\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\ExternalLibs\SDL2_ttf-2.0.15\lib\x86;..\ExternalLibs\SDL2\lib\x86;..\ExternalLibs\SDL_Image\lib\x86;..\ExternalLibs\SDL_mixer\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2_image.lib;SDL2.lib;SDL2main.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -104,10 +107,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\ExternalLibs\SDL2_ttf-2.0.15\include;..\ExternalLibs\SDL_image\include;..\ExternalLibs\SDL2\include;..\ExternalLibs\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\ExternalLibs\SDL2_ttf-2.0.15\lib\x64;..\ExternalLibs\SDL2\lib\x64;..\ExternalLibs\SDL_image\lib\x64;..\ExternalLibs\SDL_mixer\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_mixer.lib;SDL2_ttf.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -148,6 +154,34 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="Image.cpp" />
+    <ClCompile Include="Singletons\AssetManager.cpp" />
+    <ClCompile Include="Singletons\Debug.cpp" />
+    <ClCompile Include="Singletons\GameManager.cpp" />
+    <ClCompile Include="Singletons\Platform.cpp" />
+    <ClCompile Include="Singletons\StackAllocator.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="String.cpp" />
+    <ClCompile Include="Vec2.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DataStructure\List.h" />
+    <ClInclude Include="DataStructure\NodeL.h" />
+    <ClInclude Include="DataStructure\NodeT.h" />
+    <ClInclude Include="DataStructure\NodoS.h" />
+    <ClInclude Include="DataStructure\Stack.h" />
+    <ClInclude Include="DataStructure\Tree.h" />
+    <ClInclude Include="DataStructure\Vector.h" />
+    <ClInclude Include="Image.h" />
+    <ClInclude Include="MessageException.h" />
+    <ClInclude Include="Singletons\AssetManager.h" />
+    <ClInclude Include="Singletons\Debug.h" />
+    <ClInclude Include="Singletons\GameManager.h" />
+    <ClInclude Include="Singletons\Platform.h" />
+    <ClInclude Include="Singletons\StackAllocator.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="String.h" />
+    <ClInclude Include="Vec2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
