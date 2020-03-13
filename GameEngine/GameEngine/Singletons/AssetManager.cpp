@@ -47,7 +47,12 @@ void AssetManager::AddTexture(String fileName, String id, int frames) {
 				size, frames));
 	}
 	catch (std::exception e) {
-		Debug::GetPtr()->LogError(e.what());
+		std::string s = "SDL Error: ";
+		s += e.what();
+		Debug::GetPtr()->LogError(s);
+	}
+	catch (int e) {
+		Debug::GetPtr()->LogError(e);
 	}
 
 }
@@ -66,7 +71,7 @@ SDL_Texture* AssetManager::GetTextureData(String id, Vec2& size, int& frames) {
 		return img->image;
 	}
 	else
-		throw MessageException("Image " + id.toString() + " not loaded");
+		throw 302;
 }
 /*
 @param id: id of the music in tree
@@ -77,7 +82,7 @@ Mix_Music* AssetManager::GetMusic(String id) {
 	if (music)
 		return music;
 	else 
-		throw MessageException("Music " + id.toString() + "not loaded");
+		throw 303;
 }
 /*
 @param id: id of the sfx in tree
@@ -88,7 +93,7 @@ Mix_Chunk* AssetManager::GetSFX(String id) {
 	if (sfx)
 		return sfx;
 	else 
-		throw MessageException("SFX " + id.toString() + "not loaded");
+		throw 304;
 }
 /*
 Adds a song to the tree
@@ -102,8 +107,11 @@ void  AssetManager::AddMusic(String fileName, String id) {
 	Mix_Music* m = Mix_LoadMUS(name.c_str());
 	if (m)
 		mMusic.insert(id, Mix_LoadMUS(name.c_str()));
-	else
-		Debug::GetPtr()->LogError(Mix_GetError());
+	else {
+		std::string s = "SDL Error: ";
+		s += Mix_GetError();
+		Debug::GetPtr()->LogError(s);
+	}
 }
 /*
 Adds a sfx to the tree
@@ -130,7 +138,7 @@ void AssetManager::AddFont(String fileName, String id, int size) {
 	if (font)
 		fontTree.insert(id, font);
 	else
-		Debug::GetPtr()->LogError("No cargo: " + fileName.toString());
+		Debug::GetPtr()->LogError(305);
 }
 /*
 @return font
@@ -140,7 +148,7 @@ TTF_Font* AssetManager::GetFont(String id) {
 	if (t)
 		return t;
 	else
-		throw MessageException("Font : " + id.toString() + " didnt load");
+		throw 306;
 }
 
 

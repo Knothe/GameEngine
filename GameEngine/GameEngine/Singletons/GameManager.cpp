@@ -47,7 +47,9 @@ void GameManager::GameLoop() {
 			break;
 		}
 		catch (std::exception e) {
-			Debug::GetPtr()->LogError(e.what());
+			std::string s = "Unahndled Exception: ";
+			s += e.what();
+			Debug::GetPtr()->LogError(s);
 		}
 	}
 }

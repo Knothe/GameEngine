@@ -108,6 +108,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>..\ExternalLibs\SDL2_ttf-2.0.15\include;..\ExternalLibs\SDL_image\include;..\ExternalLibs\SDL2\include;..\ExternalLibs\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,9 +154,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FileManipulation.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="Singletons\AssetManager.cpp" />
+    <ClCompile Include="Singletons\AudioManager.cpp" />
     <ClCompile Include="Singletons\Debug.cpp" />
     <ClCompile Include="Singletons\GameManager.cpp" />
     <ClCompile Include="Singletons\Platform.cpp" />
@@ -166,15 +169,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataStructure\List.h" />
+    <ClInclude Include="DataStructure\Map.h" />
     <ClInclude Include="DataStructure\NodeL.h" />
+    <ClInclude Include="DataStructure\NodeM.h" />
     <ClInclude Include="DataStructure\NodeT.h" />
     <ClInclude Include="DataStructure\NodoS.h" />
     <ClInclude Include="DataStructure\Stack.h" />
     <ClInclude Include="DataStructure\Tree.h" />
     <ClInclude Include="DataStructure\Vector.h" />
+    <ClInclude Include="FileManipulation.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="MessageException.h" />
     <ClInclude Include="Singletons\AssetManager.h" />
+    <ClInclude Include="Singletons\AudioManager.h" />
     <ClInclude Include="Singletons\Debug.h" />
     <ClInclude Include="Singletons\GameManager.h" />
     <ClInclude Include="Singletons\Platform.h" />

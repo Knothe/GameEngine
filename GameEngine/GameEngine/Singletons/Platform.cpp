@@ -3,8 +3,8 @@
 #include "SDL_ttf.h"
 #include "StackAllocator.h"
 #include "Debug.h"
-#include <iostream>
-#include <fstream>
+#include "../MessageException.h"
+#include "../FileManipulation.h"
 
 using std::ifstream;
 
@@ -25,8 +25,39 @@ Platform* Platform::GetPtr() {
 Sets up the Window
 */
 Platform::Platform() {
-	ReadInit();
-	Initialize(864, 640, 3, 70, "");
+	try {
+		FileManipulation file("init.ini", true);
+		int x = file.GetValueFloat("x");
+		int y = file.GetValueInt("y");
+		int s = file.GetValueInt("scale");
+		float f = file.GetValueFloat("frameTime");
+		String name = file.GetValueString("name");
+		language = file.GetValueString("language");
+		Initialize(x, y, s, f, name);
+	}
+	catch (...) {
+		Initialize();
+	}
+}
+
+void Platform::Initialize() {
+	language = String("English");
+	String initFile;
+	
+	initFile += "[int]\n";
+	initFile += "x : 200\n";
+	initFile += "y : 600\n";
+	initFile += "scale : 1\n";
+	initFile += "\n[float]\n";
+	initFile += "frameTime : 1\n";
+	initFile += "\n[string]\n";
+	initFile += "name : Program\n";
+	initFile += "language : English";
+
+	FileManipulation f;
+	f.createFile("init.ini", initFile);
+	Initialize(200, 600, 1, 1, "Program");
+
 }
 
 void Platform::Initialize(int sizeX, int sizeY, int s, int f, String name) {
@@ -34,13 +65,13 @@ void Platform::Initialize(int sizeX, int sizeY, int s, int f, String name) {
 	height = sizeY;
 	scale = s;
 	frameTime = f;
-
+	std::string n = name.toString();
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
 		Debug::GetPtr()->LogError("SDL_INIT initializing error");
 		return;
 	}
 
-	window = SDL_CreateWindow(name.GetChar(), SDL_WINDOWPOS_CENTERED,
+	window = SDL_CreateWindow(n.c_str(), SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
 	if (window == nullptr) {
 		Debug::GetPtr()->LogError("Window initialize error");
@@ -50,29 +81,10 @@ void Platform::Initialize(int sizeX, int sizeY, int s, int f, String name) {
 
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (renderer == nullptr) {
-		Debug::GetPtr()->LogError("Renderer initialize error");
-		SDL_Quit();
+		Debug::GetPtr()->LogFatalError(101);
 		return;
 	}
 }
-
-void Platform::ReadInit() {
-	ifstream file;
-	file.open("matchEngine.ini", std::ios::out);
-	if (!file.fail()) {
-		file >> width >> height;
-	}
-	else {
-		std::cout << ".ini file not found" << std::endl;
-		std::cout << "Starting with default values" << std::endl;
-		width = 864;
-		height = 640;
-	}
-	file.close();
-	std::cout << "Width: " << width << std::endl;
-	std::cout << "Height: " << height << std::endl;
-}
-
 /*
 Draws an empty rectangle
 @param x: position in x
@@ -229,6 +241,11 @@ int Platform::GetWidth() {
 int Platform::GetHeight() {
 	return height;
 }
+
+String Platform::GetLanguage() {
+	return language;
+}
+
 /*
 Closes the program
 */

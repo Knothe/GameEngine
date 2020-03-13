@@ -15,6 +15,9 @@ void Image::Load(String id) {
 	catch (MessageException e) {
 		Debug::GetPtr()->LogError(e.what());
 	}
+	catch (int e) {
+		Debug::GetPtr()->LogError(e);
+	}
 	actualFrame = 0;
 }
 /*

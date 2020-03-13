@@ -51,6 +51,12 @@
     <ClCompile Include="Image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Singletons\AudioManager.cpp">
+      <Filter>Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="FileManipulation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataStructure\Tree.h">
@@ -103,6 +109,18 @@
     </ClInclude>
     <ClInclude Include="Image.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Singletons\AudioManager.h">
+      <Filter>Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="FileManipulation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructure\Map.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructure\NodeM.h">
+      <Filter>DataStructures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

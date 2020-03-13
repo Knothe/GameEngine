@@ -18,11 +18,13 @@ private:
 	Platform();
 	static Platform* ptr;
 	void RenderTexture(Image* image, int x, int y, int frame);
-	void ReadInit();
 	void Initialize(int sizeX, int sizeY, int s, int f, String name);
 	void DrawPoint(Vec2 v);
 	void DrawPoint(int x, int y);
+	void Initialize();
+
 public:
+	String language;
 	static SDL_Renderer* renderer;
 	void RenderClear();
 	void RenderPresent();
@@ -40,6 +42,7 @@ public:
 	Vec2 GetSize();
 	int GetWidth();
 	int GetHeight();
+	String GetLanguage();
 	void Close();
 	~Platform();
 };

@@ -1,0 +1,13 @@
+[Files=300]
+301 : File_not_found
+302 : Image_not_loaded
+303 : Music_not_loaded
+304 : SFX_not_loaded
+305 : TTF_not_added
+306 : TTF_not_found
+
+[Platform=100]
+101 : Renderer_initialize_error
+
+[Text=200]
+201 : Key_not_found

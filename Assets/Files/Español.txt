@@ -1,0 +1,13 @@
+[Files=300]
+301 : Archivo_no_encontrado
+302 : Imagen_no_cargada
+303 : Musica_no_cargada
+304 : SFX_no_cargada
+305 : TTF_no_añadido
+306 : TTF_no_encontrado
+
+[Platform=100]
+101 : Error_al_iniciar_renderer
+
+[Text=200]
+201 : Llave_no_encontrada

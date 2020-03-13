@@ -36,15 +36,15 @@
 //}
 
 #include "Singletons/Platform.h"
+#include "FileManipulation.h"
+#include "Singletons/Debug.h"
 
 int main() {
-	
-	Platform* p = Platform::GetPtr();
+	Platform * p = Platform::GetPtr();
+	Debug* d = Debug::GetPtr();
+	d->LogError(301);
 	while (true) {
-		p->RenderClear();
-		p->DrawRect(0, 0, 500, 200);
-		p->DrawCircle(Vec2(200, 200), 100);
-		p->RenderPresent();
+
 	}
 	return 0;
 }

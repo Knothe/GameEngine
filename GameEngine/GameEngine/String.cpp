@@ -15,6 +15,11 @@ String::String(const char* s) {
     
 }
 
+String::String(const wchar_t* s) {
+    _setmode(_fileno(stdout), _O_U8TEXT);
+    string = s;
+}
+
 String::String(std::string& s) {
     _setmode(_fileno(stdout), _O_U8TEXT);
     string = convert(s);
@@ -49,7 +54,7 @@ bool String::operator==(String& s) {
     return string == s.Get();
 }
 
-void String::operator=(String& s) {
+void String::operator=(String s) {
     string = s.Get();
 }
 
@@ -62,7 +67,10 @@ String String::operator+(String& s) {
 }
 
 String String::operator+(const char* s) {
-    return String(string += convert(s));
+    if (s != NULL)
+        return String(string += convert(s));
+    else
+        return String(string);
 }
 
 String String::operator+(const char s) {
@@ -82,11 +90,18 @@ void String::operator+=(String& s) {
 }
 
 void String::operator+=(const char* s) {
-    string += convert(s);
+    if (s != NULL)
+        string += convert(s);
 }
 
 void String::operator+=(const char s) {
-    string += convert(&s);
+    if (s != NULL)
+        string += convert(&s);
+}
+
+void String::operator+=(wchar_t* s) {
+    if (s != NULL)
+        string += s;
 }
 
 bool String::operator>(String s) {
@@ -101,7 +116,8 @@ std::wstring String::convert(const std::string& input) {
     try
     {
         std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-        return converter.from_bytes(input);
+        std::wstring temp = converter.from_bytes(input);
+        return temp;
     }
     catch (std::range_error & e)
     {
