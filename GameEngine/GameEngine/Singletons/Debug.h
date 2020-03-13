@@ -23,6 +23,7 @@ public:
 
 private:
 	Debug();
+	void AddToLog(String s);
 	static Debug* ptr;
 	HANDLE hConsole;
 	String log;

@@ -5,7 +5,7 @@
 #include "../MessageException.h"
 #include <io.h>
 #include <fcntl.h>
-
+#include <ctime>
 
 Debug* Debug::ptr;
 
@@ -36,40 +36,54 @@ void Debug::Log(String s) {
 
 void Debug::LogError(std::string s) {
 	SetConsoleTextAttribute(hConsole, 12);
-	log += s;
-	log += 'n';
-	String(s).Print();
+	String t(s);
+	AddToLog(t);
+	t.Print();
 }
 
 void Debug::LogError(char const* s) {
 	SetConsoleTextAttribute(hConsole, 12);
-	log += s + '\n';
-	String(s).Print();
+	String t(s);
+	AddToLog(t);
+	t.Print();
 
 }
 
 void Debug::LogError(String s) {
 	SetConsoleTextAttribute(hConsole, 12);
-	log += s;
-	log += '\n';
+	AddToLog(s);
+
 	s.Print();
 }
 
 void Debug::LogFatalError(char const* s) {
 	SetConsoleTextAttribute(hConsole, 4);
-	String(s).Print();
-	log += s + '\n';
+	String t(s);
+	AddToLog(t);
+	t.Print();
 	SetConsoleTextAttribute(hConsole, 15);
+	FileManipulation f;
+	f.createFile("log.txt", log);
 	Platform::GetPtr()->Close();
 }
 
 void Debug::LogFatalError(String s) {
 	SetConsoleTextAttribute(hConsole, 4);
 	s.Print();
-	log += s;
-	log += '\n';
+	AddToLog(s);
 	SetConsoleTextAttribute(hConsole, 15);
+	FileManipulation f;
+	f.createFile("log.txt", log);
 	Platform::GetPtr()->Close();
+}
+
+void Debug::AddToLog(String s) {
+	std::time_t t = std::time(NULL);
+	char str[26];
+	ctime_s(str, sizeof str, &t);
+	log += str;
+	log += s;
+	log += "\n";
 }
 
 void Debug::LogWarning(std::string s) {
@@ -89,18 +103,19 @@ void Debug::LogError(int s) {
 		t = errors.GetValueString(t);
 		LogError(t);
 	}
-	catch (MessageException e) {
+	catch (int e) {
 
 	}
 }
 
 void Debug::LogFatalError(int s) {
 	try {
-		String t;
-		t = errors.GetValueString("" + s);
+		std::string a = std::to_string(s);
+		String t(a);
+		t = errors.GetValueString(t);
 		LogFatalError(t);
 	}
-	catch (MessageException e) {
+	catch (int e) {
 		
 
 	}
@@ -108,11 +123,12 @@ void Debug::LogFatalError(int s) {
 
 void Debug::LogWarning(int s) {
 	try {
-		String t;
-		t = errors.GetValueString("" + s);
+		std::string a = std::to_string(s);
+		String t(a);
+		t = errors.GetValueString(t);
 		LogWarning(t);
 	}
-	catch (MessageException e) {
+	catch (int e) {
 
 	}
 }

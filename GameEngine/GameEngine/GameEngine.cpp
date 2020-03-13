@@ -43,6 +43,7 @@ int main() {
 	Platform * p = Platform::GetPtr();
 	Debug* d = Debug::GetPtr();
 	d->LogError(301);
+	d->LogFatalError(101);
 	while (true) {
 
 	}
