@@ -152,6 +152,32 @@ void Platform::DrawPoint(int x, int y) {
 	SDL_RenderDrawPoint(renderer, x, y);
 }
 /*
+Checks Event for keyboard and mouse
+@param keysDown: pointer for vector for all the keys pressed
+@param keysDown: pointer for vector for all the keys up
+@param mouseData: pointer to mouse data
+*/
+void Platform::CheckEvent(List<int>* keysDown, MouseData* mouseData) {
+	mouseData->ResetClicks();
+	SDL_Event e;
+	while (SDL_PollEvent(&e)) {
+		switch (e.type) {
+		case SDL_KEYDOWN:
+			if (e.key.keysym.sym == SDLK_p) keysDown->push_back(SDLK_p);
+			if (e.key.keysym.sym == SDLK_ESCAPE) keysDown->push_back(SDLK_ESCAPE);
+			break;
+		case SDL_MOUSEMOTION:
+			mouseData->position.x = e.motion.x;
+			mouseData->position.y = e.motion.y;
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+			if (e.button.button == SDL_BUTTON_LEFT)		mouseData->leftButton = true;
+			if (e.button.button == SDL_BUTTON_RIGHT)	mouseData->rightButton = true;
+			break;
+		}
+	}
+}
+/*
 Clears the Screen
 */
 void Platform::RenderClear() {

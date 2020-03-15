@@ -36,7 +36,7 @@ void GameManager::GameLoop() {
 			if (statesStack.GetSize() <= 0)
 				throw 0;
 			auto estado = statesStack.Top();
-			estado->Input(); // Possible Modifications
+			//estado->Input(); // Possible Modifications
 			estado->Update();
 			estado->Draw();
 			//Platform::GetPtr()->Close();

@@ -5,6 +5,8 @@
 #include "../String.h"
 #include "../Image.h"
 #include "../Vec2.h"
+#include "../DataStructure/List.h"
+#include "../MouseData.h"
 
 class Platform
 {
@@ -35,6 +37,8 @@ public:
 	void DrawRect(int x, int y, int w, int h);
 	void DrawRect(Vec2 pos, Vec2 size);
 	void DrawCircle(Vec2 position, int radius);
+
+	void CheckEvent(List<int>* keysDown, MouseData* mouseData);
 
 	static Platform* GetPtr();
 	int GetScale();

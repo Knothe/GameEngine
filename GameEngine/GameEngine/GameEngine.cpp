@@ -1,6 +1,4 @@
-﻿//#include "String.h"
-//
-//extern "C"
+﻿//extern "C"
 //{
 //#include "../ExternalLibs/Lua535/include/lua.h"
 //#include "../ExternalLibs/Lua535/include/lauxlib.h"

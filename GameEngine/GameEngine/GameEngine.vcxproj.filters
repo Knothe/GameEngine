@@ -57,6 +57,9 @@
     <ClCompile Include="FileManipulation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataStructure\Tree.h">
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="DataStructure\NodeM.h">
       <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

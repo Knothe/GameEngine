@@ -10,11 +10,13 @@ class State
 protected:
 	bool state = true;
 public:
-	virtual void Input() = 0;
-	virtual void Update() = 0;
-	virtual void Draw() = 0;
-	virtual void Init() = 0;
-	virtual void Close() = 0;
+
+	State();
+
+	void Update();
+	void Draw();
+	void Init();
+	void Close();
 
 	void SetState(bool state);
 	bool GetState();

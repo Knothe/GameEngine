@@ -165,6 +165,7 @@
     <ClCompile Include="Singletons\StackAllocator.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="String.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="Vec2.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -188,6 +189,7 @@
     <ClInclude Include="Singletons\StackAllocator.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="String.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="Vec2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
