@@ -11,3 +11,7 @@
 
 [Text=200]
 201 : Key_not_found
+
+[Lua=400]
+401 : Lua_file_not_initialized
+402 : State_not_found

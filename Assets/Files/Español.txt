@@ -11,3 +11,7 @@
 
 [Text=200]
 201 : Llave_no_encontrada
+
+[Lua=400]
+401 : Archivo_lua_no_iniciado
+402 : Estado_no_encontrado

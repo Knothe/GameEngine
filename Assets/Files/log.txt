@@ -1,4 +1,2 @@
-Fri Mar 13 10:55:39 2020
-Archivo_no_encontrado
-Fri Mar 13 10:55:39 2020
-Error_al_iniciar_renderer
+Sun Mar 15 19:44:12 2020
+Archivo_lua_no_iniciado
