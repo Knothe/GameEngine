@@ -1,8 +1,9 @@
 #pragma once
-extern"C" {
-	#include "../ExternalLibs/Lua535/include/lua.h"
-	#include "../ExternalLibs/Lua535/include/lauxlib.h"
-	#include "../ExternalLibs/Lua535/include/lualib.h"
+
+extern "C" {
+#include "../ExternalLibs/Lua535/include/lua.h"
+#include "../ExternalLibs/Lua535/include/lauxlib.h"
+#include "../ExternalLibs/Lua535/include/lualib.h"
 }
 
 #ifdef _WIN32
@@ -14,8 +15,11 @@ extern"C" {
 class LuaHandler
 {
 public:
+
 	LuaHandler();
 	LuaHandler(String s);
+
+	lua_State* GetState();
 
 	void initializeLua(String s);
 
@@ -24,12 +28,22 @@ public:
 
 	void pushNumber(float f);
 	void pushString(String s);
+	void pushPointer(unsigned long long int i);
 
-	void registerFunction(String s, int (*f)(lua_State*));
 	void pop(int n);
 
+	void addFunction(String name, int (*f)(lua_State*));
+
+	unsigned long long int getPointer(int n);
 	float getNumber(int n);
 	std::string getString(int n);
+	bool getBoolean(int n);
+
+	static unsigned long long int getPointer(lua_State* l, int n);
+	static float getNumber(lua_State* l, int n);
+	static std::string getString(lua_State* l, int n);
+
+	
 
 private:
 	bool CheckLua(lua_State* l, int r);

@@ -14,7 +14,6 @@ AssetManager* AssetManager::ptr;
 AssetManager::AssetManager() {
 	if (TTF_Init())
 		std::cout << "TTF_Init" << std::endl;
-
 }
 /*
 If pointer is null, instanciates the object
@@ -37,7 +36,7 @@ void AssetManager::AddTexture(String fileName, String id, int frames) {
 	try {
 		if (textureTree.find(id))
 			return;
-		std::string name = "Assets/Images/" + fileName.toString();
+		std::string name = "../../Assets/Images/" + fileName.toString();
 		SDL_Surface* loadedSurface = IMG_Load(name.c_str());
 		Vec2 size;
 		size.x = loadedSurface->w / frames;
@@ -103,7 +102,7 @@ Adds a song to the tree
 void  AssetManager::AddMusic(String fileName, String id) {
 	if (mMusic.find(id))
 		return;
-	std::string name = "Assets/Music/" + fileName.toString();
+	std::string name = "../../Assets/Music/" + fileName.toString();
 	Mix_Music* m = Mix_LoadMUS(name.c_str());
 	if (m)
 		mMusic.insert(id, Mix_LoadMUS(name.c_str()));
@@ -121,7 +120,7 @@ Adds a sfx to the tree
 void  AssetManager::AddSfx(String fileName, String id) {
 	if (mSFX.find(id))
 		return;
-	std::string name = "Assets/SFX/" + fileName.toString();
+	std::string name = "../../Assets/SFX/" + fileName.toString();
 	mSFX.insert(id, Mix_LoadWAV(name.c_str()));
 }
 /*
@@ -133,7 +132,7 @@ Adds a font to the tree
 void AssetManager::AddFont(String fileName, String id, int size) {
 	if (fontTree.find(id))
 		return;
-	std::string name = "Assets/TTF/" + fileName.toString();
+	std::string name = "../../Assets/TTF/" + fileName.toString();
 	TTF_Font* font = TTF_OpenFont(name.c_str(), size);
 	if (font)
 		fontTree.insert(id, font);

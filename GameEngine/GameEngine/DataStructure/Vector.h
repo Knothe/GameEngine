@@ -1,201 +1,188 @@
 #pragma once
 #include <iostream>
-#include "../MessageException.h"
-#include "List.h"
+using std::cout;
+using std::endl;
 
-template<class T>
+template <class T>
 class Vector
 {
-private:
-	T* arr;
-	int size;
-	int capacity;
-	void CopyNewVector(int newSize);
-
 public:
 	Vector();
-	Vector(int size);
-	T GetAt(unsigned int index);
-	T GetLast();
-	void PushBack(T val);
-	void Clear();
-	void TightVector();
+	Vector(int s);
+	~Vector();
+	void PushBack(T val); // PushAt ?
+	void PushAt(T val, int n);
+	void PushAt(T* val, int n);
+	T GetAt(int n);
+	T* GetAtPointer(int n);
 	int GetSize();
+	void ClearVector();
+	int GetCurrent();
+	void SetNewSize(int n);
 	void Print();
-	bool hasValue(T val);
-	void PushAt(int pos, T val);
-	void operator=(List<T>* l);
-	void operator+(Vector<T>* v);
-	void order();
+	void operator=(Vector<T> other);
+private:
+	T** array; // Doble apuntador?
+	int size;
+	int current; // ? 
+	void DoubleSize();
 };
 /*
-Stats class with capacity = 0 and size = 0
+Creates new array with predetermined size
 */
-template<class T>
+template <class T>
 Vector<T>::Vector() {
-	size = 0;
-	capacity = 1;
-	arr = new T[capacity];
+	size = 1;
+	current = 0;
+	array = new T * [1];
+	ClearVector();
 }
 /*
-Starts with a set size and capacity
-@param size: starting size of the vector
+Starts object with indicated size
+@param s: size of the array
 */
-template<class T>
-Vector<T>::Vector(int size) {
-	this->size = size;
-	capacity = size;
-	arr = new T[capacity];
-	for (int i = 0; i < size; i++) {
-		arr[i] = NULL;
-	}
+template <class T>
+Vector<T>::Vector(int s) {
+	size = s;
+	current = 0;
+	array = new T * [size];
+	ClearVector();
 }
 /*
-Return value in a position inside the bounds of the size
-@param index: position in the vector
-@return value
+
 */
-template<class T>
-T Vector<T>::GetAt(unsigned int index) {
-	if (index < size)
-		return arr[index];
+template <class T>
+Vector<T>::~Vector() {
+
 }
 /*
-Increments the size of the vector and adds a value at the end
-@param val: value to add
+Adds value at the end of the array
+@param val: value to push
 */
-template<class T>
+template <class T>
 void Vector<T>::PushBack(T val) {
-	if (size >= capacity)
-		CopyNewVector(capacity * 2);
+	if (current == size)
+		DoubleSize();
 
-	arr[size] = val;
-	size++;
+	array[current] = new T(val);
+	current++;
 }
 /*
-Clears the vector and defines the capacity = 0
-*/
-template<class T>
-void Vector<T>::Clear() {
-	size = 0;
-	capacity = 1;
-	delete arr;
-	arr = new T[capacity];
-}
-/*
-Sets the capacity equal to the size of the vector
+Adds value at an specified position
+@param val: value to add
+@param n: position to add
 */
 template <class T>
-void Vector<T>::TightVector() {
-	if (capacity > size)
-		CopyNewVector(size);
+void Vector<T>::PushAt(T val, int n) {
+	if (n < size)
+		array[n] = new T(val);
+}
+/*
+Adds a pointer to an specified position
+@param val: pointer to the value
+@param n: position to add
+*/
+template <class T>
+void Vector<T>::PushAt(T* val, int n) {
+	if (n < size)
+		array[n] = val;
+}
+/*
+Gets value in a position
+@param n: position to get
+@return value in the position
+*/
+template <class T>
+T Vector<T>::GetAt(int n) {
+	if (n >= current)
+		//throw(0);
+		return NULL;
+	else
+		return *array[n];
+}
+/*
+Gets the pointer to a value in a position
+@param n: position to get
+@return pointer to value in the position
+*/
+template <class T>
+T* Vector<T>::GetAtPointer(int n) {
+	if (n >= size)
+		//throw(0);
+		return NULL;
+	else
+		return array[n];
 
 }
 /*
-Sets new size for the vector
-If the new size is bigger the data stays
-If the new size is smaller the data is deleted
+Gets posible size of the array
+@return size of the array
 */
 template <class T>
-void Vector<T>::CopyNewVector(int newSize) {
-	T* newArr = new T[newSize];
-	if (newSize >= size) {
-		for (int i = 0; i < size; i++) {
-			newArr[i] = arr[i];
-		}
-	}
-	capacity = newSize;
-	arr = newArr;
-}
-/*
-Returns vector size
-*/
-template<class T>
 int Vector<T>::GetSize() {
 	return size;
 }
 /*
-TODO: Remember to delete later
+Gets current number of values in the array
+@return current number of values
+*/
+template<class T>
+int Vector<T>::GetCurrent() {
+	return current;
+}
+/*
+Doubles the size of the array and mantains current values in position
+*/
+template<class T>
+void Vector<T>::DoubleSize() {
+	size *= 2;
+	T** n = new T * [size];
+	for (int i = 0; i < size; i++)
+		n[i] = NULL;
+	for (int i = 0; i < current; i++)
+		n[i] = array[i];
+	delete[] array;
+	array = n;
+}
+/*
+Clears all values of the vector
+*/
+template<class T>
+void Vector<T>::ClearVector() {
+	for (int i = 0; i < size; i++)
+		array[i] = NULL;
+}
+/*
+Equals current Vector to another Vector
+*/
+template<class T>
+void Vector<T>::operator=(Vector<T> other) {
+	delete[] array;
+	size = other.GetSize();
+	T** n = new T * [size];
+	for (int i = 0; i < size; i++)
+		n[i] = other.GetAtPointer(i);
+	array = n;
+}
+/*
+Resizes vector and removes all items
+@param n: new size of the vector
+*/
+template<class T>
+void Vector<T>::SetNewSize(int n) {
+	delete[] array;
+	size = n;
+	array = new T * [size];
+	for (int i = 0; i < size; i++)
+		array[i] = NULL;
+}
+/*
+Prints all items in the vector
 */
 template<class T>
 void Vector<T>::Print() {
 	for (int i = 0; i < size; i++) {
-		std::cout << arr[i] << std::endl;
+		if (array[i])
+			cout << *array[i] << endl;
 	}
-	std::cout << "Size: " << size << std::endl;
-	std::cout << "Capacity: " << capacity << std::endl;
-}
-/*
-Searchs for a specific value
-@param val: value to search
-@return true if exists, false if not
-*/
-template<class T>
-bool Vector<T>::hasValue(T val) {
-	for (int i = 0; i < size; i++) {
-		if (arr[i] == val)
-			return true;
-	}
-	return false;
-}
-/*
-Adds a value at a certain position
-@param pos: position to push
-@param val: value to add
-*/
-template<class T>
-void  Vector<T>::PushAt(int pos, T val) {
-	if (pos < size) {
-		arr[pos] = val;
-	}
-}
-/*
-Equals this vector to a list
-@param l: list to equal
-*/
-template<class T>
-void  Vector<T>::operator=(List<T>* l) {
-	size = l->size;
-	capacity = size;
-	T* newArr = new T[size];
-	for (int i = 0; i < size; i++) {
-		newArr[i] = l->get_at(i);
-	}
-	arr = newArr;
-}
-/*
-Pushes another vector at the back of this one
-@param v: vector to push
-*/
-template<class T>
-void Vector<T>::operator+(Vector<T>* v) {
-	for (int i = 0; i < v->size; i++)
-		PushBack(v->GetAt(i));
-}
-/*
-Orders the vector
-*/
-template<class T>
-void Vector<T>::order() {
-	int biggest;
-	T temp;
-	for (int i = 0; i < size; i++) {
-		biggest = i;
-		for (int j = i; j < size; j++) {
-			if (*arr[biggest] < *arr[j])
-				biggest = j;
-		}
-		temp = arr[i];
-		arr[i] = arr[biggest];
-		arr[biggest] = temp;
-	}
-}
-/*
-@return last object in the vector
-*/
-template<class T>
-T Vector<T>::GetLast() {
-	if (size > 0)
-		return  arr[size - 1];
-	return NULL;
 }

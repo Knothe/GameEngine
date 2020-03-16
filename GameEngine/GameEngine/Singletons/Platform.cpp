@@ -106,6 +106,8 @@ Draws an empty rectangle
 */
 void Platform::DrawRect(Vec2 pos, Vec2 size) {
 	SDL_Rect rect;
+	pos = pos - (size / 2);
+
 	rect.x = pos.x * scale;
 	rect.y = pos.y * scale;
 	rect.w = size.x * scale;
@@ -115,6 +117,8 @@ void Platform::DrawRect(Vec2 pos, Vec2 size) {
 }
 
 void Platform::DrawCircle(Vec2 position, int radius) {
+	position = position * scale;
+	radius = radius * scale;
 	int x = 0;
 	int y = radius;
 	int p = 1 - radius;
@@ -159,12 +163,25 @@ Checks Event for keyboard and mouse
 */
 void Platform::CheckEvent(List<int>* keysDown, MouseData* mouseData) {
 	mouseData->ResetClicks();
+	keysDown->clear();
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
 		switch (e.type) {
 		case SDL_KEYDOWN:
-			if (e.key.keysym.sym == SDLK_p) keysDown->push_back(SDLK_p);
-			if (e.key.keysym.sym == SDLK_ESCAPE) keysDown->push_back(SDLK_ESCAPE);
+			keysDown->push_back(e.key.keysym.sym);
+			/*
+			if (e.key.keysym.sym >= 97 && e.key.keysym.sym <= 122)
+				keysDown->push_back(e.key.keysym.sym);
+			else if (e.key.keysym.sym == SDLK_ESCAPE)
+				keysDown->push_back(SDLK_ESCAPE);
+			else if (e.key.keysym.sym >= 49 && e.key.keysym.sym <= 57)
+				keysDown->push_back(e.key.keysym.sym);
+			else if (e.key.keysym.sym == SDLK_DOWN || e.key.keysym.sym == SDLK_RIGHT || e.key.keysym.sym == SDLK_UP || e.key.keysym.sym == SDLK_LEFT)
+				keysDown->push_back(e.key.keysym.sym);
+			else if (e.key.keysym.sym == 9)
+				keysDown->push_back(e.key.keysym.sym);
+			*/
+			
 			break;
 		case SDL_MOUSEMOTION:
 			mouseData->position.x = e.motion.x;
@@ -193,23 +210,6 @@ void Platform::RenderPresent() {
 /*
 Translates data for RenderTexture
 @param image: pointer to image to render
-@param x: position in x
-@param y: position in y
-*/
-void Platform::RenderImage(Image* image, int x, int y) {
-	RenderTexture(image, x, y, image->GetFrame());
-}
-/*
-Translates data for RenderTexture
-@param image: pointer to image to render
-@param pos: position
-*/
-void Platform::RenderImage(Image* image, Vec2 pos) {
-	RenderTexture(image, pos.x, pos.y, image->GetFrame());
-}
-/*
-Translates data for RenderTexture
-@param image: pointer to image to render
 @param pos: position
 @param frame: frame to draw
 */
@@ -225,10 +225,11 @@ Renders the texture with RenderCopyEx
 */
 void Platform::RenderTexture(Image* image, int x, int y, int frame) {
 	SDL_Rect dstrect;
-	dstrect.x = x * scale;
-	dstrect.y = y * scale;
 	dstrect.w = image->GetWidth() * scale;
 	dstrect.h = image->GetHeight() * scale;
+	dstrect.x = x * scale - (dstrect.w / 2);
+	dstrect.y = y * scale - (dstrect.h / 2);
+	
 	SDL_Rect srcrect;
 	srcrect.x = frame * image->GetWidth();
 	srcrect.y = 0;

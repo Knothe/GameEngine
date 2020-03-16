@@ -19,6 +19,9 @@
     <Filter Include="DataStructures">
       <UniqueIdentifier>{bf0c3253-9737-46da-bec9-86ce2d5b1fad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ExtraFiles">
+      <UniqueIdentifier>{b0132f11-32b1-467c-9c99-7ba80e1aac31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngine.cpp">
@@ -58,6 +61,30 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Text.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Square.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -128,5 +155,54 @@
     <ClInclude Include="Text.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructure\HashTable.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Square.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Assets\Files\init.ini">
+      <Filter>ExtraFiles</Filter>
+    </None>
+    <None Include="..\..\Assets\Files\LuaFiles\GameManager.lua">
+      <Filter>ExtraFiles</Filter>
+    </None>
+    <None Include="..\..\Assets\Files\LuaFiles\Scene1.lua">
+      <Filter>ExtraFiles</Filter>
+    </None>
+    <None Include="..\..\Assets\Files\LuaFiles\Scene2.lua">
+      <Filter>ExtraFiles</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\Assets\Files\English.txt">
+      <Filter>ExtraFiles</Filter>
+    </Text>
+    <Text Include="..\..\Assets\Files\Español.txt">
+      <Filter>ExtraFiles</Filter>
+    </Text>
   </ItemGroup>
 </Project>

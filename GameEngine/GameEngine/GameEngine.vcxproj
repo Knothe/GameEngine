@@ -154,21 +154,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="FileManipulation.cpp" />
     <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Image.cpp" />
+    <ClCompile Include="LuaHandler.cpp" />
+    <ClCompile Include="MouseData.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="Singletons\AssetManager.cpp" />
     <ClCompile Include="Singletons\AudioManager.cpp" />
     <ClCompile Include="Singletons\Debug.cpp" />
     <ClCompile Include="Singletons\GameManager.cpp" />
     <ClCompile Include="Singletons\Platform.cpp" />
     <ClCompile Include="Singletons\StackAllocator.cpp" />
+    <ClCompile Include="Square.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Vec2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Circle.h" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="DataStructure\HashTable.h" />
     <ClInclude Include="DataStructure\List.h" />
     <ClInclude Include="DataStructure\Map.h" />
     <ClInclude Include="DataStructure\NodeL.h" />
@@ -179,18 +191,33 @@
     <ClInclude Include="DataStructure\Tree.h" />
     <ClInclude Include="DataStructure\Vector.h" />
     <ClInclude Include="FileManipulation.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Image.h" />
+    <ClInclude Include="LuaHandler.h" />
     <ClInclude Include="MessageException.h" />
+    <ClInclude Include="MouseData.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="Singletons\AssetManager.h" />
     <ClInclude Include="Singletons\AudioManager.h" />
     <ClInclude Include="Singletons\Debug.h" />
     <ClInclude Include="Singletons\GameManager.h" />
     <ClInclude Include="Singletons\Platform.h" />
     <ClInclude Include="Singletons\StackAllocator.h" />
+    <ClInclude Include="Square.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Vec2.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Assets\Files\init.ini" />
+    <None Include="..\..\Assets\Files\LuaFiles\GameManager.lua" />
+    <None Include="..\..\Assets\Files\LuaFiles\Scene1.lua" />
+    <None Include="..\..\Assets\Files\LuaFiles\Scene2.lua" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\Assets\Files\English.txt" />
+    <Text Include="..\..\Assets\Files\Español.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

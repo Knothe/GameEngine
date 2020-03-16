@@ -1,9 +1,10 @@
 #pragma once
 #include <SDL.h>
+#include "Component.h"
 #include "Vec2.h"
 #include "String.h"
 
-class Image
+class Image : public Component
 {
 private:
 	SDL_Texture* image;
@@ -12,13 +13,18 @@ private:
 	int actualFrame;
 
 public:
+
+	Image(String t, String i, bool a);
+
+	void Init();
+	void Draw(Vec2 position);
+	void Update();
+
 	void Load(String id);
 	SDL_Texture* GetTexture();
 	int GetWidth();
 	int GetHeight();
-	int GetFrame();
 	int GetTotalFrames();
-	void NextFrame();
 	Vec2 GetSize();
 };
 

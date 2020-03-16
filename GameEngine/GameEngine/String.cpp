@@ -20,7 +20,7 @@ String::String(const wchar_t* s) {
     string = s;
 }
 
-String::String(std::string& s) {
+String::String(std::string s) {
     _setmode(_fileno(stdout), _O_U8TEXT);
     string = convert(s);
 }
@@ -50,7 +50,7 @@ bool String::operator==(std::string& s) {
     return string == convert(s);
 }
 
-bool String::operator==(String& s) {
+bool String::operator==(String s) {
     return string == s.Get();
 }
 
@@ -110,6 +110,10 @@ bool String::operator>(String s) {
 
 bool String::operator<(String s) {
     return string < s.Get();
+}
+
+bool String::operator!=(String& s) {
+    return string != s.Get();
 }
 
 std::wstring String::convert(const std::string& input) {

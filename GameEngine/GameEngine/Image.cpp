@@ -4,6 +4,9 @@
 #include "Singletons/Platform.h"
 #include "MessageException.h"
 
+Image::Image(String t, String i, bool a) : Component(t, i, a){
+
+}
 /*
 Loads a simple image
 @param n: name of the image file
@@ -20,6 +23,21 @@ void Image::Load(String id) {
 	}
 	actualFrame = 0;
 }
+
+void Image::Init() {
+	actualFrame = 0;
+}
+
+void Image::Update() {
+	actualFrame++;
+	if (actualFrame == totalFrames)
+		actualFrame = 0;
+}
+
+void Image::Draw(Vec2 position) {
+	Platform::GetPtr()->RenderImage(this, position, actualFrame);
+}
+
 /*
 @return texture of the image
 */
@@ -37,20 +55,6 @@ int Image::GetHeight() {
 */
 int Image::GetWidth() {
 	return size.x;
-}
-/*
-@return current frame
-*/
-int Image::GetFrame() {
-	return actualFrame;
-}
-/*
-Moves animation to the next frame
-*/
-void Image::NextFrame() {
-	actualFrame++;
-	if (actualFrame == totalFrames)
-		actualFrame = 0;
 }
 /*
 @return vector with the size of the texture

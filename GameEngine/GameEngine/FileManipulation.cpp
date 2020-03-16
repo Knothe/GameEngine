@@ -55,7 +55,6 @@ String FileManipulation::GetValueString(String id) {
 		String t = valueMap.get(id);
 		return t;
 	}
-	return String();
 	throw 201;
 }
 

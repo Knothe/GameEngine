@@ -1,5 +1,6 @@
 #pragma once
 #include "NodeL.h"
+#include "../Singletons/StackAllocator.h"
 
 template <class T>
 class List
