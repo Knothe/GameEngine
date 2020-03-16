@@ -12,7 +12,7 @@ public:
 	void clear();
 
 private:
-	StackAllocator(size_t size);
+	StackAllocator();
 	static StackAllocator* ptr;
 	Marker maxSize;
 	void* start;

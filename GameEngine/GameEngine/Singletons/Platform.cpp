@@ -64,7 +64,7 @@ void Platform::Initialize(int sizeX, int sizeY, int s, int f, String name) {
 	width = sizeX;
 	height = sizeY;
 	scale = s;
-	frameTime = f;
+	frameTime = 1000/f;
 	std::string n = name.toString();
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
 		Debug::GetPtr()->LogError("SDL_INIT initializing error");
@@ -84,6 +84,8 @@ void Platform::Initialize(int sizeX, int sizeY, int s, int f, String name) {
 		Debug::GetPtr()->LogFatalError(101);
 		return;
 	}
+	nextTime = SDL_GetTicks();
+	lastTime = nextTime;
 }
 /*
 Draws an empty rectangle
@@ -273,11 +275,21 @@ String Platform::GetLanguage() {
 	return language;
 }
 
+void Platform::NextFrame() {
+	Uint32 currentTime = SDL_GetTicks();
+
+	while (currentTime < nextTime) {
+		currentTime = SDL_GetTicks();
+	}
+
+	lastTime = currentTime;
+	nextTime = currentTime + frameTime;
+}
+
 /*
 Closes the program
 */
 void Platform::Close() {
-	delete GameManager::getPtr();
 	SDL_Quit();
 }
 

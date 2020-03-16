@@ -87,6 +87,9 @@
     <ClCompile Include="Square.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NewComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataStructure\Tree.h">
@@ -182,6 +185,9 @@
     <ClInclude Include="Square.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NewComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Assets\Files\init.ini">
@@ -194,6 +200,9 @@
       <Filter>ExtraFiles</Filter>
     </None>
     <None Include="..\..\Assets\Files\LuaFiles\Scene2.lua">
+      <Filter>ExtraFiles</Filter>
+    </None>
+    <None Include="..\..\Assets\Files\LuaFiles\MoveComponent.lua">
       <Filter>ExtraFiles</Filter>
     </None>
   </ItemGroup>

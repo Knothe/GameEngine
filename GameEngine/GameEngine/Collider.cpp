@@ -24,6 +24,14 @@ void Collider::Update() {
 
 }
 
+bool Collider::IsCircle() {
+	return isCircle;
+}
+
+Vec2 Collider::GetSize() {
+	return size;
+}
+
 void Collider::Draw(Vec2 position) {
 	if (isDrawing) {
 		if (isCircle) {

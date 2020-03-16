@@ -1,9 +1,9 @@
 #include "State.h"
 #include "Singletons/Debug.h"
-#include "Collider.h"
 #include "Image.h"
 #include "Square.h"
 #include "Circle.h"
+#include "NewComponent.h"
 
 State::State(String s) {
 	luaFile = s;
@@ -11,10 +11,9 @@ State::State(String s) {
 }
 
 void State::Input(List<int>* inputKeys, MouseData* mouseData) {
-	NodeL<int>* temp = inputKeys->first;
+	NodeL<GameObject*>* temp = objectList.first;
 	while (temp) {
-		String s(std::to_string(temp->value));
-		Debug::GetPtr()->Log(s);
+		temp->value->Input(inputKeys);
 		temp = temp->next;
 	}
 }
@@ -25,6 +24,72 @@ void State::Update() {
 		temp->value->Update();
 		temp = temp->next;
 	}
+	NodeL<GameObject*>* t;
+	temp = objectList.first;
+	if (!temp) return;
+
+	while (temp->next) {
+		t = temp->next;
+		while (t) {
+			CheckCollision(temp->value, t->value);
+			t = t->next;
+		}
+		temp = temp->next;
+	}
+}
+
+void State::CheckCollision(GameObject* obj1, GameObject* obj2) {
+	NodeL<Component*>* temp1 = obj1->GetPreComponent()->first;
+	NodeL<Component*>* temp2 = obj2->GetPreComponent()->first;
+	if (!temp2) return;
+	while (temp1) {
+		if (temp1->value->getType() == "Collider") {
+			while (temp2) {
+				if (temp2->value->getType() == "Collider") {
+					if (CheckCollision(obj1->GetPosition(), (Collider*)temp1->value, obj2->GetPosition(), (Collider*)temp2->value)) {
+						obj1->CollisionEnter(obj2);
+						obj2->CollisionEnter(obj1);
+					}
+				}
+				temp2 = temp2->next;
+			}
+		}
+		temp1 = temp1->next;
+	}
+}
+
+bool State::CheckCollision(Vec2 pos1, Collider* col1, Vec2 pos2, Collider* col2) {
+	if (col1->IsCircle() == col2->IsCircle()) {
+		if (col1->IsCircle()) {
+			Vec2 dist = pos1 - pos2;
+			if (dist.size <= col1->GetSize().x + col2->GetSize().x) {
+				return true;
+			}
+		}
+		else {
+			Vec2 p1x, p1y, p2x, p2y;
+			p1x.x = pos1.x - (col1->GetSize().x / 2);
+			p1x.y = pos1.x + (col1->GetSize().x / 2);
+
+			p1y.x = pos1.y - (col1->GetSize().y / 2);
+			p1y.y = pos1.y + (col1->GetSize().y / 2);
+
+
+			p2x.x = pos2.x - (col2->GetSize().x / 2);
+			p2x.y = pos2.x + (col2->GetSize().x / 2);
+
+			p2y.x = pos2.y - (col2->GetSize().y / 2);
+			p2y.y = pos2.y + (col2->GetSize().y / 2);
+
+			if ((p1x.x >= p2x.x && p1x.x <= p2x.y) || (p1x.y >= p2x.x && p1x.y <= p2x.y)) {
+				if ((p1y.x >= p2y.x && p1y.x <= p2y.y) || (p1y.y >= p2y.x && p1y.y <= p2y.y)) {
+					return true;
+				}
+			}
+
+		}
+	}
+	return false;
 }
 
 void State::Draw() {
@@ -117,7 +182,10 @@ int State::lua_AddComponent(lua_State* L) {
 		g->AddComponent(new Square(Vec2(x, y), type, name, isActive));
 	}
 	else if (type == String("New")) {
+		String file(s->lua->getString(6));
 
+		NewComponent* n = new NewComponent(file, name, isActive, g);
+		g->AddNewComponent(n);
 	}
 	return 0;
 }

@@ -37,6 +37,7 @@ void GameManager::Init() {
 		if (luaHandler->callFunction(1, 0)) {
 			Debug::GetPtr()->Log(L"Start initialized");
 		}
+		luaHandler->pop(1);
 	}
 }
 
@@ -108,6 +109,7 @@ void GameManager::GameLoop() {
 		try {
 			if (statesStack.GetSize() <= 0)
 				throw 0;
+			Platform::GetPtr()->NextFrame();
 			auto estado = statesStack.Top();
 			Platform::GetPtr()->CheckEvent(&keysDown, &mouseData);
 			estado->Input(&keysDown, &mouseData);

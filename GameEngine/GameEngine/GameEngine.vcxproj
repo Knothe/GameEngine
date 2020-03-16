@@ -163,6 +163,7 @@
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="LuaHandler.cpp" />
     <ClCompile Include="MouseData.cpp" />
+    <ClCompile Include="NewComponent.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Singletons\AssetManager.cpp" />
     <ClCompile Include="Singletons\AudioManager.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="LuaHandler.h" />
     <ClInclude Include="MessageException.h" />
     <ClInclude Include="MouseData.h" />
+    <ClInclude Include="NewComponent.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Singletons\AssetManager.h" />
     <ClInclude Include="Singletons\AudioManager.h" />
@@ -212,6 +214,7 @@
   <ItemGroup>
     <None Include="..\..\Assets\Files\init.ini" />
     <None Include="..\..\Assets\Files\LuaFiles\GameManager.lua" />
+    <None Include="..\..\Assets\Files\LuaFiles\MoveComponent.lua" />
     <None Include="..\..\Assets\Files\LuaFiles\Scene1.lua" />
     <None Include="..\..\Assets\Files\LuaFiles\Scene2.lua" />
   </ItemGroup>

@@ -47,6 +47,7 @@ Vec2 Vec2::operator+(const Vec2 other) {
 	Vec2 v;
 	v.x = x + other.x;
 	v.y = y + other.y;
+	v.setSize();
 	return v;
 }
 /*
@@ -58,6 +59,7 @@ Vec2 Vec2::operator-(const Vec2 other) {
 	Vec2 v;
 	v.x = x - other.x;
 	v.y = y - other.y;
+	v.setSize();
 	return v;
 }
 /*

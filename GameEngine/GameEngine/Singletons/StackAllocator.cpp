@@ -1,16 +1,26 @@
 #include "StackAllocator.h"
+#include "../FileManipulation.h"
 
 StackAllocator* StackAllocator::ptr;
 
 StackAllocator* StackAllocator::GetPtr() {
 	if (!ptr)
-		ptr = new StackAllocator(1024 * 1024 * 512);
+		ptr = new StackAllocator();
 	return ptr;
 }
 
 
-StackAllocator::StackAllocator(size_t size)
+StackAllocator::StackAllocator()
 {
+	int size;
+	try {
+		FileManipulation file("init.ini", true);
+		int temp = file.GetValueFloat("size");
+		size = 1024 * 1024 * temp;
+	}
+	catch (...) {
+		size = 1024 * 1024 * 512;
+	}
 	static_assert(sizeof(size_t) >= sizeof(void*), "the size of uint must be greater than or equal to the size of a pointer");
 	maxSize = size;
 	start = malloc(size);

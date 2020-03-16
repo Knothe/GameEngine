@@ -14,7 +14,11 @@ private:
 	int width;
 	int height;
 	int scale;
-	Uint16 frameTime;
+	Uint32 frameTime;
+	Uint32 nextTime;
+	Uint32 lastTime;
+
+
 	SDL_Window* window;
 
 	Platform();
@@ -43,6 +47,7 @@ public:
 	static Platform* GetPtr();
 	int GetScale();
 	Uint16 GetFrameTime();
+	void NextFrame();
 	Vec2 GetSize();
 	int GetWidth();
 	int GetHeight();

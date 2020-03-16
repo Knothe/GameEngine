@@ -14,6 +14,7 @@ private:
 	static int lua_FirstState(lua_State* L);
 	static int lua_AddFile(lua_State* L);
 
+
 	Stack<State*> statesStack;
 	HashTable<State*> stateTable;
 

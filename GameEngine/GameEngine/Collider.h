@@ -11,7 +11,8 @@ public:
 	void Init();
 	void Update();
 	void Draw(Vec2 position);
-
+	bool IsCircle();
+	Vec2 GetSize();
 
 private:
 	Vec2 size;

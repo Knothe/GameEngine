@@ -35,7 +35,12 @@ bool LuaHandler::CheckLua(lua_State* l, int r) {
 }
 
 bool LuaHandler::getGlobal(String s) {
-	lua_getglobal(L, s.toString().c_str());
+	try {
+		lua_getglobal(L, s.toString().c_str());
+	}
+	catch (std::exception e) {
+		int x;
+	}
 	return lua_isfunction(L, -1);
 }
 
@@ -93,4 +98,8 @@ unsigned long long int LuaHandler::getPointer(lua_State* l, int n) {
 
 std::string LuaHandler::getString(lua_State* l, int n) {
 	return lua_tostring(l, n);
+}
+
+void LuaHandler::pushNumber(lua_State* l, float f) {
+	lua_pushnumber(l, f);
 }

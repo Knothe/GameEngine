@@ -43,6 +43,7 @@ public:
 	static float getNumber(lua_State* l, int n);
 	static std::string getString(lua_State* l, int n);
 
+	static void pushNumber(lua_State* l, float f);
 	
 
 private:
