@@ -164,7 +164,6 @@
     <ClCompile Include="LuaHandler.cpp" />
     <ClCompile Include="MouseData.cpp" />
     <ClCompile Include="NewComponent.cpp" />
-    <ClCompile Include="Object.cpp" />
     <ClCompile Include="Singletons\AssetManager.cpp" />
     <ClCompile Include="Singletons\AudioManager.cpp" />
     <ClCompile Include="Singletons\Debug.cpp" />
@@ -198,7 +197,6 @@
     <ClInclude Include="MessageException.h" />
     <ClInclude Include="MouseData.h" />
     <ClInclude Include="NewComponent.h" />
-    <ClInclude Include="Object.h" />
     <ClInclude Include="Singletons\AssetManager.h" />
     <ClInclude Include="Singletons\AudioManager.h" />
     <ClInclude Include="Singletons\Debug.h" />
@@ -212,15 +210,13 @@
     <ClInclude Include="Vec2.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Assets\Files\English.json" />
+    <None Include="..\..\Assets\Files\Español.json" />
     <None Include="..\..\Assets\Files\init.ini" />
     <None Include="..\..\Assets\Files\LuaFiles\GameManager.lua" />
     <None Include="..\..\Assets\Files\LuaFiles\MoveComponent.lua" />
     <None Include="..\..\Assets\Files\LuaFiles\Scene1.lua" />
     <None Include="..\..\Assets\Files\LuaFiles\Scene2.lua" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\..\Assets\Files\English.txt" />
-    <Text Include="..\..\Assets\Files\Español.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

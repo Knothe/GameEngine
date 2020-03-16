@@ -20,7 +20,7 @@ Debug* Debug::GetPtr() {
 Debug::Debug() {
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	String t = Platform::GetPtr()->language;
-	t += ".txt";
+	t += ".json";
 	errors.openFile(t, true);
 }
 
@@ -63,7 +63,7 @@ void Debug::LogFatalError(char const* s) {
 	t.Print();
 	SetConsoleTextAttribute(hConsole, 15);
 	FileManipulation f;
-	f.createFile("log.txt", log);
+	f.createFile("log.json", log);
 	Platform::GetPtr()->Close();
 }
 
@@ -73,7 +73,7 @@ void Debug::LogFatalError(String s) {
 	AddToLog(s);
 	SetConsoleTextAttribute(hConsole, 15);
 	FileManipulation f;
-	f.createFile("log.txt", log);
+	f.createFile("log.json", log);
 	Platform::GetPtr()->Close();
 }
 
@@ -117,7 +117,6 @@ void Debug::LogFatalError(int s) {
 	}
 	catch (int e) {
 		
-
 	}
 }
 

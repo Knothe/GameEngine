@@ -38,6 +38,7 @@ Platform::Platform() {
 	catch (...) {
 		Initialize();
 	}
+	isActive = true;
 }
 
 void Platform::Initialize() {
@@ -58,6 +59,10 @@ void Platform::Initialize() {
 	f.createFile("init.ini", initFile);
 	Initialize(200, 600, 1, 1, "Program");
 
+}
+
+bool Platform::GetActive() {
+	return isActive;
 }
 
 void Platform::Initialize(int sizeX, int sizeY, int s, int f, String name) {
@@ -171,19 +176,6 @@ void Platform::CheckEvent(List<int>* keysDown, MouseData* mouseData) {
 		switch (e.type) {
 		case SDL_KEYDOWN:
 			keysDown->push_back(e.key.keysym.sym);
-			/*
-			if (e.key.keysym.sym >= 97 && e.key.keysym.sym <= 122)
-				keysDown->push_back(e.key.keysym.sym);
-			else if (e.key.keysym.sym == SDLK_ESCAPE)
-				keysDown->push_back(SDLK_ESCAPE);
-			else if (e.key.keysym.sym >= 49 && e.key.keysym.sym <= 57)
-				keysDown->push_back(e.key.keysym.sym);
-			else if (e.key.keysym.sym == SDLK_DOWN || e.key.keysym.sym == SDLK_RIGHT || e.key.keysym.sym == SDLK_UP || e.key.keysym.sym == SDLK_LEFT)
-				keysDown->push_back(e.key.keysym.sym);
-			else if (e.key.keysym.sym == 9)
-				keysDown->push_back(e.key.keysym.sym);
-			*/
-			
 			break;
 		case SDL_MOUSEMOTION:
 			mouseData->position.x = e.motion.x;
@@ -291,6 +283,7 @@ Closes the program
 */
 void Platform::Close() {
 	SDL_Quit();
+	isActive = false();
 }
 
 Platform::~Platform() {

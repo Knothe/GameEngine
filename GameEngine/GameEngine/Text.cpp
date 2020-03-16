@@ -21,6 +21,7 @@ Sets the surface (SDL_RECT)
 */
 void Text::SetSurface() {
 	try {
+
 		SDL_Surface* surf = TTF_RenderText_Blended(AssetManager::getPtr()->GetFont(font), text.toString().c_str(), textColour);
 		labelTexture = SDL_CreateTextureFromSurface(Platform::renderer, surf);
 		SDL_FreeSurface(surf);

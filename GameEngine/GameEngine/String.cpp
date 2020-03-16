@@ -134,6 +134,9 @@ std::wstring String::convert(const std::string& input) {
         }
         return result;
     }
+    catch (...) {
+
+    }
 }
 
 std::string String::toString() {

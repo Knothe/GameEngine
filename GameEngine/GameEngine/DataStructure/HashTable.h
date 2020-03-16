@@ -2,10 +2,11 @@
 #include <iostream>
 #include "Vector.h"
 #include "../String.h"
+#include "../Singletons/StackAllocator.h"
 
 using std::wcout;
 using std::endl;
-
+ 
 template<class T>
 struct Object {
 	Object(String id, T val) : identifier(id), obj(val) {}

@@ -8,8 +8,9 @@ using std::endl;
 int main() {
 	Platform::GetPtr();
 	GameManager* g = GameManager::getPtr();
-	g->Init();
-	g->GameLoop();
-	
+	if (Platform::GetPtr()->GetActive()) {
+		g->Init();
+		g->GameLoop();
+	}
 	return 0;
 }

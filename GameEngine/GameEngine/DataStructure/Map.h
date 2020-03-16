@@ -32,6 +32,7 @@ Map<T, U>::~Map() {
 */
 template <class T, class U>
 void Map<T, U>::push(T key, U val) {
+	
 	if (!first) {
 		first = new NodeM<T, U>(key, val);
 		last = first;

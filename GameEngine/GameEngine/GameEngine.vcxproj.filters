@@ -66,9 +66,6 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -161,9 +158,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -190,10 +184,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Assets\Files\init.ini">
+    <None Include="..\..\Assets\Files\LuaFiles\GameManager.lua">
       <Filter>ExtraFiles</Filter>
     </None>
-    <None Include="..\..\Assets\Files\LuaFiles\GameManager.lua">
+    <None Include="..\..\Assets\Files\LuaFiles\MoveComponent.lua">
       <Filter>ExtraFiles</Filter>
     </None>
     <None Include="..\..\Assets\Files\LuaFiles\Scene1.lua">
@@ -202,16 +196,14 @@
     <None Include="..\..\Assets\Files\LuaFiles\Scene2.lua">
       <Filter>ExtraFiles</Filter>
     </None>
-    <None Include="..\..\Assets\Files\LuaFiles\MoveComponent.lua">
+    <None Include="..\..\Assets\Files\English.json">
       <Filter>ExtraFiles</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\..\Assets\Files\English.txt">
+    <None Include="..\..\Assets\Files\Español.json">
       <Filter>ExtraFiles</Filter>
-    </Text>
-    <Text Include="..\..\Assets\Files\Español.txt">
+    </None>
+    <None Include="..\..\Assets\Files\init.ini">
       <Filter>ExtraFiles</Filter>
-    </Text>
+    </None>
   </ItemGroup>
 </Project>

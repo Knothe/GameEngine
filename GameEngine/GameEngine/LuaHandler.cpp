@@ -1,5 +1,5 @@
 #include "LuaHandler.h"
-
+#include "Singletons/Debug.h"
 
 LuaHandler::LuaHandler() {
 	L = luaL_newstate();
@@ -28,7 +28,7 @@ void LuaHandler::initializeLua(String s) {
 bool LuaHandler::CheckLua(lua_State* l, int r) {
 	if (r != LUA_OK) {
 		String e = lua_tostring(L, -1);
-		e.Print();
+		Debug::GetPtr()->LogError(e);
 		return false;
 	}
 	return true;

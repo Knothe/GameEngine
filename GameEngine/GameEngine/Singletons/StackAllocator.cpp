@@ -13,6 +13,7 @@ StackAllocator* StackAllocator::GetPtr() {
 StackAllocator::StackAllocator()
 {
 	int size;
+	size = 0;
 	try {
 		FileManipulation file("init.ini", true);
 		int temp = file.GetValueFloat("size");

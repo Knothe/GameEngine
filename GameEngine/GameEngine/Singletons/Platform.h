@@ -17,7 +17,7 @@ private:
 	Uint32 frameTime;
 	Uint32 nextTime;
 	Uint32 lastTime;
-
+	bool isActive;
 
 	SDL_Window* window;
 
@@ -43,7 +43,7 @@ public:
 	void DrawCircle(Vec2 position, int radius);
 
 	void CheckEvent(List<int>* keysDown, MouseData* mouseData);
-
+	bool GetActive();
 	static Platform* GetPtr();
 	int GetScale();
 	Uint16 GetFrameTime();

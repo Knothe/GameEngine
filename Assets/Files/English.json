@@ -5,6 +5,7 @@
 304 : SFX_not_loaded
 305 : TTF_not_added
 306 : TTF_not_found
+307 : Image_not_found
 
 [Platform=100]
 101 : Renderer_initialize_error

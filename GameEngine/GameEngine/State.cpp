@@ -4,6 +4,7 @@
 #include "Square.h"
 #include "Circle.h"
 #include "NewComponent.h"
+#include "Singletons/StackAllocator.h"
 
 State::State(String s) {
 	luaFile = s;
@@ -112,7 +113,6 @@ void State::Init() {
 		if(lua->getGlobal("SetScene")) {
 			lua->pushPointer((unsigned long long int)this);
 			if (lua->callFunction(1, 0)) {
-				Debug::GetPtr()->Log(L"StartState");
 			}
 		}
 	}
@@ -130,8 +130,8 @@ int State::lua_AddGameObject(lua_State* L) {
 	String id(s->lua->getString(2));
 	int x = s->lua->getNumber(3);
 	int y = s->lua->getNumber(4);
-
-	GameObject* obj = new GameObject(id, Vec2(x, y));
+	void* buf = StackAllocator::GetPtr()->alloc(sizeof(GameObject));
+	GameObject* obj = new(buf) GameObject(id, Vec2(x, y));
 	s->objectList.push_back(obj);
 	s->objectMap.Add(id, obj);
 	return 0;
@@ -152,39 +152,45 @@ int State::lua_AddComponent(lua_State* L) {
 		bool isCircle = s->lua->getBoolean(7);
 		if (isCircle) {
 			int r = s->lua->getNumber(8);
-			g->AddComponent(new Collider(r, isDrawing, type, name, isActive));
+			void* buf = StackAllocator::GetPtr()->alloc(sizeof(Collider));
+			g->AddComponent(new(buf) Collider(r, isDrawing, type, name, isActive));
 		}
 		else {
 			int x = s->lua->getNumber(8);
 			int y = s->lua->getNumber(9);
-			g->AddComponent(new Collider(Vec2(x, y), isDrawing, type, name, isActive));
+			void* buf = StackAllocator::GetPtr()->alloc(sizeof(Collider));
+			g->AddComponent(new(buf) Collider(Vec2(x, y), isDrawing, type, name, isActive));
 		}
 	}
 	else if (type == String("Image")) {
 		String file(s->lua->getString(6));
-		Image* i = new Image(type, name, isActive);
+		void* buf = StackAllocator::GetPtr()->alloc(sizeof(Image));
+		Image* i = new(buf) Image(type, name, isActive);
 		g->AddComponent(i);
 		i->Load(file);
 	}
 	else if (type == String("Animation")) {
 		String file(s->lua->getString(6));
-		Image* i = new Image(type, name, isActive);
+		void* buf = StackAllocator::GetPtr()->alloc(sizeof(Image));
+		Image* i = new(buf) Image(type, name, isActive);
 		g->AddComponent(i);
 		i->Load(file);
 	}
 	else if (type == String("Circle")) {
 		int r = s->lua->getNumber(6);
-		g->AddComponent(new Circle(r, type, name, isActive));
+		void* buf = StackAllocator::GetPtr()->alloc(sizeof(Circle));
+		g->AddComponent(new(buf) Circle(r, type, name, isActive));
 	}
 	else if (type == String("Square")) {
 		int x = s->lua->getNumber(6);
 		int y = s->lua->getNumber(7);
-		g->AddComponent(new Square(Vec2(x, y), type, name, isActive));
+		void* buf = StackAllocator::GetPtr()->alloc(sizeof(Square));
+		g->AddComponent(new(buf) Square(Vec2(x, y), type, name, isActive));
 	}
 	else if (type == String("New")) {
 		String file(s->lua->getString(6));
-
-		NewComponent* n = new NewComponent(file, name, isActive, g);
+		void* buf = StackAllocator::GetPtr()->alloc(sizeof(NewComponent));
+		NewComponent* n = new(buf) NewComponent(file, name, isActive, g);
 		g->AddNewComponent(n);
 	}
 	return 0;

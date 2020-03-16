@@ -1,11 +1,13 @@
 #include "NewComponent.h"
 #include "Singletons/Debug.h"
+#include "Singletons/StackAllocator.h"
 
 NewComponent::NewComponent(String file, String i, bool active, GameObject* obj) {
 	id = i;
 	isActive = active;
 	object = obj;
-	lua = new LuaHandler(file);
+	void* buf = StackAllocator::GetPtr()->alloc(sizeof(LuaHandler));
+	lua = new(buf) LuaHandler(file);
 }
 
 LuaHandler* NewComponent::GetLua() {

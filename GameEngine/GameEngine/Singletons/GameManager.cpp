@@ -35,7 +35,6 @@ void GameManager::Init() {
 	if (luaHandler->getGlobal("Start")) {
 		luaHandler->pushPointer((unsigned long long int)ptr);
 		if (luaHandler->callFunction(1, 0)) {
-			Debug::GetPtr()->Log(L"Start initialized");
 		}
 		luaHandler->pop(1);
 	}
@@ -105,13 +104,14 @@ void GameManager::SetState(String id) {
 Executes the game loop while there are things in the stack
 */
 void GameManager::GameLoop() {
-	while(true) {
+	Platform* p = Platform::GetPtr();
+	while(p->GetActive()) {
 		try {
 			if (statesStack.GetSize() <= 0)
 				throw 0;
-			Platform::GetPtr()->NextFrame();
+			p->NextFrame();
 			auto estado = statesStack.Top();
-			Platform::GetPtr()->CheckEvent(&keysDown, &mouseData);
+			p->CheckEvent(&keysDown, &mouseData);
 			estado->Input(&keysDown, &mouseData);
 			estado->Update();
 			estado->Draw();

@@ -38,6 +38,8 @@ void AssetManager::AddTexture(String fileName, String id, int frames) {
 			return;
 		std::string name = "../../Assets/Images/" + fileName.toString();
 		SDL_Surface* loadedSurface = IMG_Load(name.c_str());
+		if (!loadedSurface)
+			throw 307;
 		Vec2 size;
 		size.x = loadedSurface->w / frames;
 		size.y = loadedSurface->h;
@@ -52,6 +54,9 @@ void AssetManager::AddTexture(String fileName, String id, int frames) {
 	}
 	catch (int e) {
 		Debug::GetPtr()->LogError(e);
+	}
+	catch (...) {
+
 	}
 
 }
