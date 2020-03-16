@@ -9,7 +9,6 @@ StackAllocator* StackAllocator::GetPtr() {
 	return ptr;
 }
 
-
 StackAllocator::StackAllocator()
 {
 	int size;

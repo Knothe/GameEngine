@@ -108,9 +108,10 @@ void  AssetManager::AddMusic(String fileName, String id) {
 	if (mMusic.find(id))
 		return;
 	std::string name = "../../Assets/Music/" + fileName.toString();
+	name = "../../Assets/Music/Game.mp3";
 	Mix_Music* m = Mix_LoadMUS(name.c_str());
 	if (m)
-		mMusic.insert(id, Mix_LoadMUS(name.c_str()));
+		mMusic.insert(id, m);
 	else {
 		std::string s = "SDL Error: ";
 		s += Mix_GetError();

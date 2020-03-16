@@ -21,6 +21,7 @@ private:
 	bool CheckCollision(Vec2 pos1, Collider* col1, Vec2 pos2, Collider* col2);
 	static int lua_AddGameObject(lua_State* L);
 	static int lua_AddComponent(lua_State* L);
+	static int lua_StartMusic(lua_State* L);
 
 public:
 

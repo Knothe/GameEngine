@@ -5,6 +5,7 @@
 #include "Circle.h"
 #include "NewComponent.h"
 #include "Singletons/StackAllocator.h"
+#include "Singletons/AudioManager.h"
 
 State::State(String s) {
 	luaFile = s;
@@ -110,6 +111,7 @@ void State::Init() {
 		lua = new LuaHandler(luaFile);
 		lua->addFunction("AddGameObject", lua_AddGameObject);
 		lua->addFunction("AddComponent", lua_AddComponent);
+		lua->addFunction("StartMusic", lua_StartMusic);
 		if(lua->getGlobal("SetScene")) {
 			lua->pushPointer((unsigned long long int)this);
 			if (lua->callFunction(1, 0)) {
@@ -193,6 +195,12 @@ int State::lua_AddComponent(lua_State* L) {
 		NewComponent* n = new(buf) NewComponent(file, name, isActive, g);
 		g->AddNewComponent(n);
 	}
+	return 0;
+}
+
+int State::lua_StartMusic(lua_State* L) {
+	String s(LuaHandler::getString(L, 1));
+	AudioManager::getPtr()->PlayMusic(s);
 	return 0;
 }
 
