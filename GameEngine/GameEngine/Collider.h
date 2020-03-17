@@ -18,6 +18,5 @@ private:
 	Vec2 size;
 	bool isDrawing;
 	bool isCircle;
-	bool isColliding;
 };
 

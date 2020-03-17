@@ -34,8 +34,7 @@ public:
 	static SDL_Renderer* renderer;
 	void RenderClear();
 	void RenderPresent();
-	//void RenderImage(Image* image, int x, int y);
-	//void RenderImage(Image* image, Vec2 pos);
+
 	void RenderImage(Image* image, Vec2 pos, int frame);
 
 	void DrawRect(int x, int y, int w, int h);

@@ -4,7 +4,6 @@
 Collider::Collider(Vec2 s, bool drawing, String t, String i, bool a) : Component(t, i, a) {
 	size = s;
 	isDrawing = drawing;
-	isColliding = false;
 	isCircle = false;
 }
 
@@ -13,7 +12,6 @@ Collider::Collider(float s, bool drawing, String t, String i, bool a) : Componen
 	size.y = 0;
 	isDrawing = drawing;
 	isCircle = true;
-	isColliding = false;
 }
 
 void Collider::Init() {
